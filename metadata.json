@@ -1,0 +1,8 @@
+{
+  "name": "Copy of Copy of Copy of VELRA - Luxury Leather Boutique",
+  "description": "A premium leather lifestyle e-commerce store offering handcrafted bags, shoes, and accessories with a high-end Indian aesthetic.",
+  "requestFramePermissions": [
+    "camera",
+    "geolocation"
+  ]
+}

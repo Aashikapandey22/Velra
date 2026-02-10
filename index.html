@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VELRA | Luxury Leather Boutique</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300..900;1,300..900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <style>
+        :root {
+            --burgundy: #600018;
+            --cherry: #9B1B30;
+            --gold: #A67C00; 
+            --beige: #FAF9F6;
+            --transition-speed: 500ms;
+        }
+
+        /* Global transition for theme switching */
+        body, nav, main, footer, div, section, h1, h2, h3, h4, h5, p, span, button, input, select {
+            transition: background-color var(--transition-speed) ease-in-out, 
+                        color var(--transition-speed) ease-in-out, 
+                        border-color var(--transition-speed) ease-in-out,
+                        box-shadow var(--transition-speed) ease-in-out;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--beige);
+            color: #1A1A1A; 
+            scroll-behavior: smooth;
+        }
+
+        .dark body {
+            background-color: #1A0006; /* Near-black burgundy */
+            color: #FAF9F6;
+        }
+
+        h1, h2, h3, h4, h5, h6, .luxury-serif {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: -0.01em;
+            font-weight: 700;
+        }
+        
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/p6.png');
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .leather-texture {
+            background-image: url('https://www.transparenttextures.com/patterns/leather.png');
+            background-repeat: repeat;
+        }
+
+        .lux-card {
+            background: #FFFFFF;
+            border: 1px solid rgba(166, 124, 0, 0.1);
+        }
+        .dark .lux-card {
+            background: rgba(45, 0, 11, 0.6);
+            border-color: rgba(212, 175, 55, 0.15);
+            backdrop-blur: 10px;
+        }
+        
+        .lux-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(166, 124, 0, 0.4);
+            box-shadow: 0 40px 80px -15px rgba(96, 0, 24, 0.12);
+        }
+        .dark .lux-card:hover {
+            border-color: #D4AF37;
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.15);
+        }
+
+        .lux-button {
+            background: #600018;
+            color: #FAF9F6;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            font-weight: 800;
+            font-size: 11px;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid transparent;
+        }
+        .dark .lux-button {
+            background: #D4AF37;
+            color: #1A0006;
+        }
+        .lux-button:hover {
+            background: #9B1B30; 
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(155, 27, 48, 0.2);
+        }
+        .dark .lux-button:hover {
+            background: #FAF9F6;
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.3);
+        }
+        
+        .gold-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #A67C00, transparent);
+            width: 80%;
+            margin: 6rem auto;
+            opacity: 0.3;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #600018;
+        }
+
+        .gold-glow {
+            box-shadow: 0 0 20px rgba(166, 124, 0, 0.3);
+        }
+        .dark .gold-glow {
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Shine effect for Night Mood cards */
+        .dark .lux-shimmer {
+            position: relative;
+            overflow: hidden;
+        }
+        .dark .lux-shimmer::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.05) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: rotate(45deg);
+            transition: transform 0.8s;
+            pointer-events: none;
+        }
+        .dark .lux-shimmer:hover::after {
+            transform: rotate(45deg) translate(20%, 20%);
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        burgundy: {
+                            DEFAULT: '#600018',
+                            dark: '#4A0E0E',
+                            deep: '#2D000B',
+                            cherry: '#9B1B30'
+                        },
+                        gold: {
+                            DEFAULT: '#A67C00',
+                            matte: '#8E6B00',
+                            bright: '#D4AF37'
+                        },
+                        beige: {
+                            DEFAULT: '#FAF9F6',
+                            ivory: '#FFFFF0',
+                            paper: '#F5F5DC'
+                        }
+                    },
+                    boxShadow: {
+                        'gold-glow': '0 20px 50px -15px rgba(166, 124, 0, 0.4)',
+                        'lux': '0 40px 80px -15px rgba(96, 0, 24, 0.12)',
+                    },
+                    spacing: {
+                        '128': '32rem',
+                        '144': '36rem',
+                    }
+                }
+            }
+        }
+    </script>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.4",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.13.0",
+    "framer-motion": "https://esm.sh/framer-motion@^11.0.0",
+    "@google/genai": "https://esm.sh/@google/genai@^1.40.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="custom-scrollbar antialiased overflow-x-hidden transition-colors duration-500">
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
